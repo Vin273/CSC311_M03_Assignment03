@@ -27,9 +27,37 @@ public class MazeApplication extends Application {
         Group root = new Group(imageView1, imageView2);
         Scene scene = new Scene(root, 700, 500);
 
+        final int MOVE = 5;
+
+        scene.setOnKeyPressed(event -> {
+
+            double x = imageView2.getX();
+            double y = imageView2.getY();
+
+            switch (event.getCode()) {
+
+                case LEFT:
+                    imageView2.setX(x - MOVE);
+                    break;
+
+                case RIGHT:
+                    imageView2.setX(x + MOVE);
+                    break;
+
+                case UP:
+                    imageView2.setY(y - MOVE);
+                    break;
+
+                case DOWN:
+                    imageView2.setY(y + MOVE);
+                    break;
+            }
+        });
+
         stage.setTitle("Maze");
         stage.setScene(scene);
         stage.show();
+
     }
     public static void main(String[] args) {
         launch(args);
