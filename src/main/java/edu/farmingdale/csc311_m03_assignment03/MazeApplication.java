@@ -27,6 +27,15 @@ public class MazeApplication extends Application {
         Group root = new Group(imageView1, imageView2);
         Scene scene = new Scene(root, 700, 500);
 
+
+//        Image maze2 = new Image("maze2.png");
+//        ImageView mazeImageView2 = new ImageView(maze2);
+//        mazeImageView2.setFitWidth(700);
+//        mazeImageView2.setFitHeight(500);
+//        Car car1 = new Car();
+//        Group group = new Group(mazeImageView2, car1);
+//        Scene scene = new Scene(group);
+
         final int MOVE = 5;
 
         scene.setOnKeyPressed(event -> {
