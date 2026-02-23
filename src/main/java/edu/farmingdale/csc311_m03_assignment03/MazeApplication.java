@@ -50,7 +50,9 @@ public class MazeApplication extends Application {
                     break;
 
                 case RIGHT:
-                    imageView2.setX(x + MOVE);
+                    if (x + MOVE <= 700 - imageView2.getImage().getWidth()) {
+                        imageView2.setX(x + MOVE );
+                    }
                     break;
 
                 case UP:
@@ -61,6 +63,7 @@ public class MazeApplication extends Application {
                     imageView2.setY(y + MOVE);
                     break;
             }
+            
         });
 
         stage.setTitle("Maze");
