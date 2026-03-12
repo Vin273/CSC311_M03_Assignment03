@@ -14,7 +14,6 @@ import javafx.scene.control.TabPane;
 public class MazeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MazeApplication.class.getResource("maze-view.fxml"));
 
         Image maze1 = new Image("maze1.png");
         ImageView imageView1 = new ImageView(maze1);
@@ -32,6 +31,7 @@ public class MazeApplication extends Application {
         ImageView mazeImageView2 = new ImageView(maze2);
         mazeImageView2.setFitWidth(700);
         mazeImageView2.setFitHeight(500);
+
         Car car1 = new Car();
         Group group = new Group(mazeImageView2, car1);
 
@@ -51,33 +51,58 @@ public class MazeApplication extends Application {
         final int MOVE = 5;
 
         scene.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+            Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
 
-            double x = imageView2.getX();
-            double y = imageView2.getY();
+            if (selectedTab == tab1) {
+                double x = imageView2.getX();
+                double y = imageView2.getY();
+                switch (event.getCode()) {
 
-            switch (event.getCode()) {
+                    case LEFT:
+                        moveRobotIfPossible(x-MOVE,y);
+                        event.consume();
+                        break;
 
-                case LEFT:
-                    imageView2.setX(x - MOVE);
-                    event.consume();
-                    break;
+                    case RIGHT:
+                        moveRobotIfPossible(x+MOVE,y);
+                        event.consume();
+                        break;
 
-                case RIGHT:
-                    if (x + MOVE <= 700 - imageView2.getImage().getWidth()) {
-                        imageView2.setX(x + MOVE);
-                    }
-                    event.consume();
-                    break;
+                    case UP:
+                        moveRobotIfPossible(x,y-MOVE);
+                        event.consume();
+                        break;
 
-                case UP:
-                    imageView2.setY(y - MOVE);
-                    event.consume();
-                    break;
+                    case DOWN:
+                        moveRobotIfPossible(x,y+MOVE);
+                        event.consume();
+                        break;
+                }
+            } else if (selectedTab == tab2) {
+                double x = car1.getLayoutX();
+                double y = car1.getLayoutY();
 
-                case DOWN:
-                    imageView2.setY(y + MOVE);
-                    event.consume();
-                    break;
+                switch (event.getCode()) {
+                    case LEFT:
+                        moveCarIfPossible(x - MOVE, y, 270);
+                        event.consume();
+                        break;
+
+                    case RIGHT:
+                        moveCarIfPossible(x + MOVE, y, 90);
+                        event.consume();
+                        break;
+
+                    case UP:
+                        moveCarIfPossible(x, y - MOVE, 0);
+                        event.consume();
+                        break;
+
+                    case DOWN:
+                        moveCarIfPossible(x, y + MOVE, 180);
+                        event.consume();
+                        break;
+                }
             }
         });
 

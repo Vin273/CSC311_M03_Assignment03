@@ -9,6 +9,8 @@ public class MazeController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        if (welcomeText != null) {
+            welcomeText.setText("Welcome to JavaFX Application!");
+        }
     }
 }
